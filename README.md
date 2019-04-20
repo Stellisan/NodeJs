@@ -23,14 +23,14 @@ Models for the Database tables
 
 AR_ClientObj
   Member Variables: 
-          - iClientno
-          - sClientName
-          - sAddressOne
-          - sAddressTwo
-          - sPincode
-          - sMobileNo
-          - sState
-          - sCountry
+  - iClientno
+  - sClientName
+  - sAddressOne
+  - sAddressTwo
+  - sPincode
+  - sMobileNo
+  - sState
+  - sCountry
           
 public folder:
 Contains the resources required for the views
