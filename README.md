@@ -22,7 +22,7 @@ Objects
 Models for the Database tables
 
 AR_ClientObj
-  Member Variables: 
+Member Variables: 
   - iClientno
   - sClientName
   - sAddressOne
