@@ -1,14 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var connection = require('../database/databaseconnect');
+let connection = require("../database/databaseconnect");
 
-router.use(function(req, res, next){    
-});
-
-router.get('/bill', function(req, res){
-    var DBConnect = new connection();
-    DBConnect.getcustomers();
-    res.render('bill');
+router.get('/bill', async function(req, res){
+    let lClientList = await connection.DBConnect();
+    console.log(lClientList);
+    res.render('bill', {ClientList : lClientList});
 });
 
 module.exports = router;
