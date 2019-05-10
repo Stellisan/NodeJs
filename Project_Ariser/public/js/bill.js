@@ -1,18 +1,19 @@
-$(document).ready(function(){
+$(document).ready(async function(){
 	
 	option_list('addr0');
+	var row_number=1;
 	
-    var i=1;
-    $("#add_row").click(function(){b=i-1;
-      	$('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
-      	$('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-		option_list('addr'+i);
-      	i++; 
-  	});
+    $("#add_row").click(function(){b=row_number-1;
+      	$('#addr'+row_number).html($('#addr'+b).html()).find('td:first-child').html(i+1);
+      	$('#tab_logic').append('<tr id="addr'+(row_number+1)+'"></tr>');
+		option_list('addr'+row_number);
+		row_number++; 
+	  });
+	  
     $("#delete_row").click(function(){
-    	if(i>1){
+    	if(row_number>1){
 		$("#addr"+(i-1)).html('');
-		i--;
+		row_number--;
 		}
 		calc();
 	});
@@ -20,28 +21,32 @@ $(document).ready(function(){
 	$(".product").on('change',function(){
 	    option_checker(this)
 	});
-	
-	
+
 	$('#tab_logic tbody').on('keyup change',function(){
 		calc();
 	});
+
 	$('#tax').on('keyup change',function(){
 		calc_total();
 	});
 
+	$('#save').click(function(){
+		alert('feef');
+			$.post('save');
+	});
 });
 
 function option_checker(id)
 {
 	var myOption=$(id).val();
-	var s =0;
+	var iSelection =0;
 	$('#tab_logic tbody tr select').each(function(index, element){
          var myselect = $(this).val();
 		if(myselect==myOption){
-			s += 1;
+			iSelection += 1;
 		}
     });
-	if(s>1){
+	if(iSelection>1){
 		alert(myOption+' as been added already try new..')	
 	}
 }
@@ -51,8 +56,8 @@ function option_list(id)
 	el='#'+id;
 	var myArray = ["Product 1", "Product 2", "Product 3", "Product 4"];
 	var collect = '<option value="">Select Product</option>';
-    for(var i = 0; i<myArray.length;i++){
-        collect += '<option value="'+myArray[i]+'">'+myArray[i]+'</option>';
+    for(var iIndex = 0; iIndex<myArray.length;iIndex++){
+        collect += '<option value="'+myArray[iIndex]+'">'+myArray[iIndex]+'</option>';
     }
     $(el+" select").html(collect);
 }
