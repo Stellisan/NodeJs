@@ -46,13 +46,13 @@
                                 <nav class="site-navigation position-relative text-right" role="navigation">
                                   <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                                   
-                                    <li><a href="index.html">Home</a></li>
-                                    <li class="active"><a href="http://localhost:3000/pages/bill">Bill History</a></li>
-                                    <li><a href="about.html">Dispatch</a></li>
+                                    <li><a href="home">Home</a></li>
+                                    <li class="active"><a>Bill History</a></li>
+                                    <li><a href="about">Dispatch</a></li>
                                     
-                                    <li><a href="blog.html">Drawings</a></li>
-                                    <li><a href="login.html">Clients</a></li>
-                                    <li><a href="login.html">Invoice</a></li>
+                                    <li><a href="blog">Drawings</a></li>
+                                    <li><a href="login">Clients</a></li>
+                                    <li><a href="login">Invoice</a></li>
                                 
                                   </ul>
                                 </nav>
@@ -97,7 +97,7 @@
 													<tr>
 														<td class="meta-head">Bill Date</td>
 														<td style = "padding: 15px;"><div class="input-group date" data-provide="datepicker">
-																<input type="text" class="form-control">
+																<input type="text" placeholder='Enter Date' class="form-control">
 																<div class="input-group-addon">
 																	<span class="glyphicon glyphicon-th"></span>
 																</div>
@@ -113,7 +113,7 @@
 														</div>
 														<div class="col-sm-10">
 															<select class="browser-default custom-select">
-																<option selected>Open this select menu</option>
+																<option selected>Select Client</option>
 																<% ClientList.forEach(function(client){%>
 																	<option><%= client %></option>
 																	<%});%>
@@ -187,6 +187,11 @@
 													</tr>
 												</tbody>
 											</table>
+										</div>
+										<div>
+												<div class="col-md-4">
+														<input type = "button" id="save" class="btn btn-default pull-left" value = "Save"></input>
+												</div>
 										</div>
 									</div>
 								</div>

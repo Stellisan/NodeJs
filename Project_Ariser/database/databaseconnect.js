@@ -5,52 +5,53 @@ var string = require('../utilities/string');
     
 let connection = null;
 
-  async function getCustomers() 
-   {
-    try {
-        connection = await oracledb.getConnection(  {
+module.exports.DBConnect = async function()
+{
+  try{        connection = await oracledb.getConnection(  {
                     user          : "system",
                     password      : "admin",
                     connectString : "localhost:1521/xe"
                 });
+              }catch (err) {
+                console.error(err);
+              }
+};
 
-    let result = await connection.execute(
-            string.s_customer
-        );
-    
+module.exports.GetCustomers = async function() 
+   {
+    try 
+    {
+        let result = await connection.execute(string.s_customer);
         return(result.rows);
-//For inserting
-    // const sqlQuery = `INSERT INTO system.asdb_client (CLIENT_ID, C_TIN_DATE, C_ADDRESS_ONE, C_ADDRESS_TWO, C_CITY, C_PINCODE, C_PHONE_NO, C_NAME, C_STATE, C_COUNTRY) VALUES (:0, :1, :2, :3, :4, :5, :6, :7, :8, :9)`;
-
-    // binds = [[6,myDate,'12, Teachers Colony','Ganapathy, Gandhinagar','Coimbatore','641006','9987650987','LPT','Tamil Nadu','India']];
-
-    // result = await connection.executeMany(sqlQuery, binds, {autoCommit: true});
-
-    // console.log("Number of inserted rows:", result.rowsAffected);
-
   } catch (err) {
     console.error(err);
-  } finally {
-    if (connection) {
-      try {
-        await connection.close();
-      } catch (err) {
-        console.error(err);
-      }
-    }
+  }
+}
+  
+module.exports.InsertClient = async function()
+{
+  try
+  {
+    //For inserting
+    var myDate = new Date(2019,9,12);
+    const sqlQuery = `INSERT INTO ASDB_CUSTOMER (C_ID, C_NAME, C_ADDRESS_ONE, C_ADDRESS_TWO, C_CITY, C_PINCODE, C_PHONE_NO, C_GSTIN) VALUES (:0, :1, :2, :3, :4, :5, :6, :7)`;
+    let binds = [[2,'LPT','12, Teachers Colony','Ganapathy, Gandhinagar','Coimbatore','641006','9987650987','asd23123sdff12']];
+    let result = await connection.executeMany(sqlQuery, binds, {autoCommit: true});
+    console.log("Number of inserted rows:", result.rowsAffected);
+  }
+  catch (err) {
+    console.error(err);
   }
 }
 
+module.exports.DBClose = async function()
+{
+   if (connection) {
+    try {
+        connection.close();
+    } catch (err) {
+        console.error(err);
+     }
+  }
+}
 
-
-    function dbclose()
-    {
-        if (connection) {
-            try {
-              connection.close();
-            } catch (err) {
-              console.error(err);
-            }
-      }
-    }
-module.exports.DBConnect = getCustomers;
