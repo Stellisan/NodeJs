@@ -1,0 +1,79 @@
+CREATE DATABASE `ariserdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+CREATE TABLE `asdb_bill` (
+  `BILL_NO` int(11) NOT NULL,
+  `B_DATE` date DEFAULT NULL,
+  `B_GST` int(11) DEFAULT NULL,
+  `B_TOTAL_PRICE` int(11) DEFAULT NULL,
+  `B_SUB_TOTAL` int(11) DEFAULT NULL,
+  PRIMARY KEY (`BILL_NO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `asdb_bill_dispatch_reltn` (
+  `BD_RELTN_NO` int(11) NOT NULL,
+  `DC_NO` varchar(50) DEFAULT NULL,
+  `BILL_NO` int(11) DEFAULT NULL,
+  `DRAWING_NO` varchar(50) DEFAULT NULL,
+  `QUANTITY` varchar(20) DEFAULT NULL,
+  `TOTAL` int(11) DEFAULT NULL,
+  PRIMARY KEY (`BD_RELTN_NO`),
+  KEY `BillNo_idx` (`DC_NO`),
+  KEY `BillNo_idx1` (`BILL_NO`),
+  KEY `DrawingBillReltn_idx` (`DRAWING_NO`),
+  CONSTRAINT `BillDCReltn` FOREIGN KEY (`BILL_NO`) REFERENCES `asdb_bill` (`BILL_NO`),
+  CONSTRAINT `DCBillReltn` FOREIGN KEY (`DC_NO`) REFERENCES `asdb_dispatch` (`DC_NO`),
+  CONSTRAINT `DrawingBillReltn` FOREIGN KEY (`DRAWING_NO`) REFERENCES `asdb_component` (`DRAWING_NO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `asdb_component` (
+  `DRAWING_NO` varchar(50) NOT NULL,
+  `C_ID` int(11) NOT NULL,
+  `CO_DESCRIPTION` varchar(100) DEFAULT NULL,
+  `CO_OPERATION` varchar(100) DEFAULT NULL,
+  `CO_PRICE_PIECE` int(11) NOT NULL,
+  `CO_HSN` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`DRAWING_NO`),
+  KEY `DrawingCustomerReltn_idx` (`C_ID`),
+  CONSTRAINT `DrawingCustomerReltn` FOREIGN KEY (`C_ID`) REFERENCES `asdb_customer` (`C_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `asdb_customer` (
+  `C_ID` int(11) NOT NULL,
+  `C_NAME` varchar(80) DEFAULT NULL,
+  `C_ADDRESS_ONE` varchar(70) DEFAULT NULL,
+  `C_ADDRESS_TWO` varchar(70) DEFAULT NULL,
+  `C_CITY` varchar(30) DEFAULT NULL,
+  `C_PINCODE` varchar(6) DEFAULT NULL,
+  `C_PHONE_NO` varchar(10) DEFAULT NULL,
+  `C_GSTIN` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`C_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `asdb_dispatch` (
+  `DC_NO` varchar(20) NOT NULL,
+  `DC_DATE` datetime DEFAULT NULL,
+  `DRAWING_NO` varchar(30) DEFAULT NULL,
+  `PHY_QUAN` int(11) DEFAULT NULL,
+  `REC_QUAN` int(11) DEFAULT NULL,
+  PRIMARY KEY (`DC_NO`),
+  KEY `DCClientReltn_idx` (`DRAWING_NO`),
+  CONSTRAINT `DrawingNoClientReltn` FOREIGN KEY (`DRAWING_NO`) REFERENCES `asdb_component` (`DRAWING_NO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `asdb_purchaseorder` (
+  `PURCHASENO` int(11) NOT NULL,
+  `DRAWING_NO` varchar(20) DEFAULT NULL,
+  `P_DATE` date DEFAULT NULL,
+  `P_QUANTITY` int(11) DEFAULT NULL,
+  PRIMARY KEY (`PURCHASENO`),
+  KEY `DrawingPurchaseReltn_idx` (`DRAWING_NO`),
+  CONSTRAINT `DrawingPurchaseReltn` FOREIGN KEY (`DRAWING_NO`) REFERENCES `asdb_component` (`DRAWING_NO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `asv_billbymonth` AS select `ab`.`BILL_NO` AS `BILL_NO`,`acu`.`C_NAME` AS `C_NAME`,`ab`.`B_SUB_TOTAL` AS `B_SUB_TOTAL`,`ab`.`B_GST` AS `B_GST`,`ab`.`B_TOTAL_PRICE` AS `B_TOTAL_PRICE`,date_format(`ab`.`B_DATE`,'%M-%Y') AS `BDATE` from (((`asdb_component` `ac` join `asdb_bill_dispatch_reltn` `abdr`) join `asdb_bill` `ab`) join `asdb_customer` `acu`) where ((`abdr`.`DRAWING_NO` = `ac`.`DRAWING_NO`) and (`abdr`.`BILL_NO` = `ab`.`BILL_NO`) and (`ac`.`C_ID` = `acu`.`C_ID`)) order by `ab`.`BILL_NO`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `asv_hsntotalsum` (`HSN`,`QUANTITY`,`TOTAL`,`BDATE`) AS select `ac`.`CO_HSN` AS `CO_HSN`,sum(`abdr`.`QUANTITY`) AS `QUANTITY`,sum(`abdr`.`TOTAL`) AS `SUMTOTAL`,date_format(`ab`.`B_DATE`,'%m-%Y') AS `BDATE` from ((`asdb_component` `ac` join `asdb_bill_dispatch_reltn` `abdr`) join `asdb_bill` `ab`) where ((`abdr`.`DRAWING_NO` = `ac`.`DRAWING_NO`) and (`abdr`.`BILL_NO` = `ab`.`BILL_NO`)) group by `ac`.`CO_HSN`,date_format(`ab`.`B_DATE`,'%m-%Y');
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `asv_latestcomp` (`DC_NO`,`DC_DATE`,`DRAWING_NO`,`PHY_QUAN`,`REC_QUAN`) AS select `ad`.`DC_NO` AS `DC_NO`,`ad`.`DC_DATE` AS `DC_DATE`,`ad`.`DRAWING_NO` AS `DRAWING_NO`,`ad`.`PHY_QUAN` AS `PHY_QUAN`,`ad`.`REC_QUAN` AS `REC_QUAN` from `asdb_dispatch` `ad` where (`ad`.`PHY_QUAN` <> 0);
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `asv_phyquant` (`C_ID`,`DRAWING_NO`,`TOTAL_QUAN`) AS select `ac`.`C_ID` AS `C_ID`,`ad`.`DRAWING_NO` AS `drawing_no`,sum(`ad`.`PHY_QUAN`) AS `total_quan` from ((`asdb_dispatch` `ad` join `asdb_customer` `ac`) join `asdb_component` `aco`) where ((`aco`.`DRAWING_NO` = `ad`.`DRAWING_NO`) and (`aco`.`C_ID` = `ac`.`C_ID`)) group by `ad`.`DRAWING_NO`,`ac`.`C_ID`;

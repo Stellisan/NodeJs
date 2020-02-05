@@ -1,0 +1,8 @@
+
+body * { visibility: hidden;
+		font-size: 21px;}
+		
+
+.printcontent * { visibility: visible; }
+
+.printcontent { position: absolute; width:150px; margin-left:6mm;margin-right:6mm;margin-top:3mm;margin-bottom:0mm;}

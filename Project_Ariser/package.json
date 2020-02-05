@@ -11,7 +11,14 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "jquery": "^3.4.1",
+    "jugglingdb": "^2.0.1",
+    "jugglingdb-mysql": "^0.2.3",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.7.0",
     "nodemon": "^1.18.11",
-    "oracledb": "^3.1.2"
+    "oracledb": "^3.1.2",
+    "sequelize": "^5.17.2",
+    "sequelize-auto": "^0.4.29"
   }
 }

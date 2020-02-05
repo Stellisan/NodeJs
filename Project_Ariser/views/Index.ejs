@@ -4,28 +4,21 @@
     <title>Ariser &mdash; Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
     <link rel="stylesheet" href="/public/fonts/icomoon/style.css">
-
     <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/magnific-popup.css">
     <link rel="stylesheet" href="/public/css/jquery-ui.css">
     <link rel="stylesheet" href="/public/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
-
     <link rel="stylesheet" href="/public/css/bootstrap-datepicker.css">
-
     <link rel="stylesheet" href="/public/fonts/flaticon/font/flaticon.css">
-
     <link rel="stylesheet" href="/public/css/aos.css">
     <link rel="stylesheet" href="/public/css/rangeslider.css">
-
     <link rel="stylesheet" href="/public/css/style.css">
-
-    <link rel="stylesheet" href="/public/logo/CSS/salogos.css">
-    
-    
+    <link rel="stylesheet" href="/public/css/inputappearance.css">
+    <link rel="stylesheet" href="/public/css/billtable.css">
+    <link rel="stylesheet" href="/public/css/autocomplete.css">
   </head>
 
   <body>
@@ -56,13 +49,23 @@
                 <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 
                   <li class="active"><a>Home</a></li>
-                  <li><a href="bill">Bill History</a></li>
-                  <li><a href="about">Dispatch</a></li>
-                  
-                  <li><a href="blog.html">Drawings</a></li>
-                  <li><a href="login.html">Clients</a></li>
-                  <li><a href="login.html">Invoice</a></li>
-              
+                  <li class="has-children">
+                    <a href="bill">Invoice</a>
+                    <ul class="dropdown">
+                        <li><a href="bill">Create Invoice</a></li>
+                        <li><a href="billhistory">Invoice History</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-children">
+                    <a href="dispatch">Incoming</a>
+                    <ul class="dropdown">
+                        <li><a href="dispatch">Add Incoming</a></li>
+                        <li><a href="incomingquery">Invoming History</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="component">Components</a></li>
+                  <li><a href="customer">Clients</a></li>
+									<li><a href="reports">Reports</a></li>
                 </ul>
               </nav>
            </div>      
@@ -73,23 +76,23 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                    <div class="col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-                     <a href="http://localhost:3000/pages/bill" class="popular-category h-100">
-                      <img src="/public/logo/bill.png" height="42" width="42">
+                     <a href="bill" class="popular-category h-100">
+                      <img src="/public/logo/invoice.jpg" height="42" width="42">
                       <br>
                       <br>
-                      <span class="caption mb-2 d-block lead">Bill</span>
+                      <span class="caption mb-2 d-block lead">Invoice</span>
                       </a>
                     </div>
                     <div class="col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-                      <a href="#" class="popular-category h-100">
+                      <a href="dispatch" class="popular-category h-100">
                           <img src="/public/logo/dispatch.png" height="42" width="42">
                           <br>
                           <br> 
-                          <span class="caption mb-2 d-block lead">Dispatch</span>
+                          <span class="caption mb-2 d-block lead">Incoming</span>
                       </a>
                     </div>
                     <div class="col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-                      <a href="#" class="popular-category h-100">
+                      <a href="customer" class="popular-category h-100">
                           <img src="/public/logo/client.png" height="42" width="42">
                           <br>
                           <br>  
@@ -97,27 +100,20 @@
                       </a>
                     </div>
                     <div class="col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-                      <a href="#" class="popular-category h-100">
+                      <a href="component" class="popular-category h-100">
                           <img src="/public/logo/drawing.png" height="42" width="42">
                           <br>
                           <br>  
-                          <span class="caption mb-2 d-block lead">Drawings</span>
+                          <span class="caption mb-2 d-block lead">Components</span>
                       </a>
                     </div>
-                    <div class="col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-                        <a href="#" class="popular-category h-100">
-                            <img src="/public/logo/invoice.jpg" height="42" width="42">
-                            <br>
-                            <br>  
-                            <span class="caption mb-2 d-block lead">Invoice</span>
-                        </a>
-                      </div>
                   </div>
               </div>
             </div>
             
 
-          <footer class="site-footer">
+
+          <!-- <footer class="site-footer">
       <div class="container">
         <div class="row">
           <div class="col-md-10">
@@ -125,10 +121,10 @@
               <div class="col-md-6">
                 <cite class = "text-light">It always seems impossible until it's done.</cite>
                 <p>Nelson Mandela</p>
-              </div>
-              <div class="col-md-4">
+                <div class="col-md-4">
                   <h2 class="footer-heading mb-4">Contact</h2>
                   <p>Ph no: 9853366488<br>Email: arisercnc@rediffmail.com</p>
+                </div>
                 </div>
               </div>
             </div>
@@ -139,7 +135,7 @@
             </div>
           </div>
       </div>
-    </footer>
+    </footer> -->
   </div>
         <script src="/public/js/jquery-3.3.1.min.js"></script>
         <script src="/public/js/jquery-migrate-3.0.1.min.js"></script>

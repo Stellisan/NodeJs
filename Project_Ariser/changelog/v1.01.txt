@@ -1,0 +1,9 @@
+Issues:
+
+1. two dcs for a single component does not populate the bill print(Done)
+2. Saving the latest price from the dc for the component(Done)
+3. date picker does not disappear on clicking(Done)
+4. bill print on saving(Done)
+5. DC page and DC printing
+6. Bill Description
+7. DC not populating for older rows on adding a new row in bill.(Done)

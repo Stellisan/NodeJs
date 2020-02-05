@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ariser &mdash; Bill History</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/magnific-popup.css">
+    <link rel="stylesheet" href="/public/css/jquery-ui.css">
+    <link rel="stylesheet" href="/public/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" href="/public/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="/public/css/aos.css">
+    <link rel="stylesheet" href="/public/css/rangeslider.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/inputappearance.css">
+    
+    <script>
+            var ClientList = <%- JSON.stringify(ClientList) %>;
+    </script>
+
+  </head>
+
+  <body>
+        <div class="site-wrap">
+            <div class="site-mobile-menu">
+                <div class="site-mobile-menu-header">
+                    <div class="site-mobile-menu-close mt-3">
+                        <span class="icon-close2 js-menu-toggle"></span>
+                    </div>
+                </div>
+                    
+                <div class="site-mobile-menu-body"></div>
+                
+            </div>
+                    
+            <header class="site-navbar container py-0 bg-white" role="banner">
+                
+                <div class="row align-items-center">
+                    <div class="col-6 col-xl-2">
+                        
+                        <h1 class="mb-0 site-logo"><a href="http://localhost:3000/pages/home" class="text-black mb-0"><img style="max-width:330px; margin-top: 10px;" src="/public/images/AriserLogoLandscape.png" />  </a></h1>
+                    
+                    </div>
+                                  
+                    <div class="col-12 col-md-10 d-none d-xl-block">
+                        <nav class="site-navigation position-relative text-right" role="navigation">
+                            <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
+                                <li><a href="home">Home</a></li>
+                                <li class="has-children">
+                                        <a href="bill">Invoice</a>
+                                        <ul class="dropdown">
+                                            <li><a href="bill">Create Invoice</a></li>
+                                            <li class="active"><a>Invoice History</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li class="has-children">
+                                        <a href="dispatch">Incoming</a>
+                                        <ul class="dropdown">
+                                            <li><a href="dispatch">Add Incoming</a></li>
+                                            <li><a href="incomingquery">Incoming History</a></li>
+                                        </ul>
+                                     </li>
+                                <li><a href="component">Drawings</a></li>
+                                <li><a href="customer">Clients</a></li>
+								<li><a href="reports">Reports</a></li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                
+                </div>
+
+            </header>
+                
+            <script>
+                let BillHistories = <%- JSON.stringify(BillHistory) %>;
+                let DCHistories = <%- JSON.stringify(DCHistory) %>;
+                let origColor='#ffffff';
+            </script>
+
+            <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(/public/images/Scene_3.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+                    
+                <div class="container">
+                    
+                    <div class="row align-items-center justify-content-center text-center">
+                        
+                        <div class="col-md-10" data-aos="fade-up" data-aos-delay="400">
+                            
+                            <div class="row justify-content-center mt-5">
+                            
+                                <div class="col-md-8 text-center">
+                                    <h1>Bill History</h1>
+                                </div>
+                            
+                            </div>
+                        
+                        </div>
+
+                    </div>
+                
+                </div>
+            
+            </div> 
+        
+            <div class="site-section bg-light">
+                    <div class="container">
+                        <div class="row">
+                        <form class="p-5 bg-white" method="post" autocomplete="off" onsubmit="return FormValidation()">
+                           <div class="container">
+                        
+                                <div class="row form-group">
+                                    
+                                    <div class="col-md-4">
+                                        <label for="billno">Customer: </label>
+                                        <input class="form-control" name="filter-billno" id="filter-billno" type="number" placeholder="Customer">                      
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="customername">Customer: </label>
+                                        <div class="autocomplete" style="width:300px;">
+                                           <input class="form-control" name="filter-customername" id="filter-customer" type="text" placeholder="Customer">
+                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+
+                                    <div class="col-md-4">
+                                        <label for="billdate">Invoice Date: </label>
+                                        <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy" width=100>
+                                            <input name="filter-billdate" id="filter-billdate" type="text" placeholder='Enter Date' class="form-control" required="true">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="col-md-4">
+                                            <label for="billdate">Invoice Date: </label>
+                                            <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy" width=100>
+                                                <input name="filter-billdate" id="filter-billdate" type="text" placeholder='Enter Date' class="form-control" required="true">
+                                                <div class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-th"></span>
+                                                </div>
+                                            </div>
+                                    </div>
+
+					            </div>
+                    
+
+                                <div class="row form-group">
+                                    
+                                    <div class="col-md-4">
+                                        <input type = "button" id="save" class="btn btn-default pull-left" value = "Filter" onclick="FilterTable()"></input>
+                                    </div>
+                                
+                                </div>
+
+                            </div>
+                    
+                        </form>
+                        </div>
+                        <div class="row">
+                                        <table class="table table-bordered table-hover" id="tab_logic">
+                                        
+                                            <thead>
+                                            
+                                                <tr>
+                                                    <th class="text-center"> BillNo </th>
+                                                    <th class="text-center"> Customer </th>
+                                                    <th class="text-center"> Bill Date </th>
+                                                    <th class="text-center"> GST </th>
+                                                    <th class="text-center"> Total </th>
+                                                    <th class="text-center" width="150"> Status </th>
+                                                </tr>
+                                            
+                                            </thead>
+                                            
+                                            <tbody>
+                                            </tbody>
+                                        
+                                        </table>
+
+                        </div>
+                    </div>
+        </div>
+                    <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            Do you want to update the status of the Bill?
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                            <button id="updatestatus" onclick="UpdateBill()" data-dismiss="modal" type="button" class="btn btn-primary">Update</button>
+                        </div>
+                    
+                      </div>
+                    </div>
+                </div>
+                </div>
+                <script src="/public/js/jquery-3.3.1.min.js"></script>
+                <script src="/public/js/jquery-migrate-3.0.1.min.js"></script>
+                <script src="/public/js/jquery-ui.js"></script>
+                <script src="/public/js/jquery.js"></script>
+                <script src="/public/js/popper.min.js"></script>
+                <script src="/public/js/bootstrap.min.js"></script>
+                <script src="/public/js/owl.carousel.min.js"></script>
+                <script src="/public/js/jquery.stellar.min.js"></script>
+                <script src="/public/js/jquery.countdown.min.js"></script>
+                <script src="/public/js/jquery.magnific-popup.min.js"></script>
+                <script src="/public/js/bootstrap-datepicker.js"></script>
+                <script src="/public/js/aos.js"></script>
+                <script src="/public/js/rangeslider.min.js"></script>
+                <script src="/public/js/main.js"></script>
+                <script src="/public/js/billhistory.js"></script>
+    </body>
+
+</html> 

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+	<title>Ariser &mdash; Print</title>
+   
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="/public/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/magnific-popup.css">
+    <link rel="stylesheet" href="/public/css/jquery-ui.css">
+    <link rel="stylesheet" href="/public/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" href="/public/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="/public/css/aos.css">
+    <link rel="stylesheet" href="/public/css/rangeslider.css">
+	<link rel="stylesheet" href="/public/css/style.css">
+	<link rel="stylesheet" href="/public/css/inputappearance.css">
+	<link rel="stylesheet" href="/public/css/billtable.css">
+	<link rel="stylesheet" type="text/css" media="print" href="/public/css/printstyle.css" />
+  
+	<script>
+		var PrintBill = <%- JSON.stringify(printbill) %>;
+	</script>
+</head>
+  
+	<body>
+	<form class="p-5 bg-white" method="get" autocomplete="off" action="/pages/billhistory">	
+	<div class="container printcontent" style="font-size:21px;">
+	<p class="text-center"><b>Tax Invoice Cum Delivery Challan</b></p>
+		<table id="billtable" style="margin-left:-2%;width:100%">
+				<col width=5% />
+				<col width=10% />
+				<col width=30% />
+				<col width=23% />
+				
+				<col width=7% />
+
+				<col width=7% />
+				<col width=3% />
+				<col width=13% />
+			<tr>
+			<td class="text-center" colspan="8" style="border-right: 2px solid black; border-left: 2px solid black; border-top:2px solid black;border-bottom:none;">
+				<img width=500 src="/public/images/billariserlogo.png" v:shapes="WordArt_x0020_1">
+				<p class="text-center" >15/1, P&T Colony, Gandhi Nagar, Ganapathy, Coimbatore - 641006.<br>Mobile : 98433 66488&nbsp E-mail  : arisercnc@rediff.com</p>
+			</td>
+			</tr>
+			<tr>
+			<td rowspan=3 class="text-left" colspan="6" style="border-right: 2px solid black; border-left: 2px solid black; border-top:none;">
+				<p>GSTIN  :  33AAMPA5560H1ZX<br>State    :  Tamil Nadu<br>State  Code  :  33</p>
+			</td>
+			<td class="text-left" colspan="2" style="border-right: 2px solid black; border-left: 2px solid black; border-top:2px solid black;border-bottom:2px solid black;">
+				Buyer's Original Copy
+			</td>
+			</tr>
+			<tr>
+			<td class="text-left" colspan="2" style="border:2px solid black;">
+				Second copy
+			</td>
+			</tr>
+			<tr>
+			<td class="text-left" colspan="2" style="border:2px solid black;">
+				Seller's copy
+			</td>
+			</tr>
+			<tr>
+				<td rowspan="3" colspan="3" style="border:2px solid black;" width=500>Invoice to:<p id="company" style="padding:0px 20px 0px 40px;">Company Name<br>Address 1<br>Addresss 2<br>GSTIN: 1234323423</p></td>
+				<td colspan="3" class="text-center" style="border: 2px solid black;"><b>Invoice No:</b><br><p id="invoiceno" stlye="padding:0px;">01</p></td>
+				<td colspan="2" class="text-center" style="border: 2px solid black;"><b>Invoice Date:</b><br><p id="invoicedate"></p></td>
+			</tr>
+			<tr>
+				<td class="text-center" style="border: 2px solid black;">Your PO No</td>
+				<td colspan="2" class="text-center" style="border: 2px solid black;">PO Date</td>
+				<td class="text-center" style="border: 2px solid black;">Quantity</td>
+				<td width=30 class="text-center" style="border: 2px solid black;">Code</td>
+			</tr>
+			<tr>
+				<td id="dcno" class="text-center" style="border: 2px solid black;">S1212<br>S3223</td>
+				<td id="dcdate" colspan="2" class="text-center" style="border: 2px solid black;">1212<br>3223</td>
+				<td id="dcqty" class="text-center" style="border: 2px solid black;">12<br>32</td>
+				<td id="dccode" width=30 class="text-center" style="border: 2px solid black;">04-02-2019<br>04-02-2019</td>
+			</tr>
+			<tr>
+				<td style="padding-left:5px; border: 2px solid black;">S.No</td>
+				<td style="padding-left:5px; border: 2px solid black;">Code</td>
+				<td style="padding-left:5px; border: 2px solid black;">Description</td>
+				<td style="padding-left:5px; border: 2px solid black;">HSN</td>
+				<td style="padding-left:5px; border: 2px solid black;" width=25>QTY</td>
+				<td style="padding-left:5px; border: 2px solid black;" width=75>UOM</td>
+				<td style="padding-left:5px; border: 2px solid black;">Rate/Unit</td>
+				<td style="padding-left:5px; border: 2px solid black;">Taxable Value</td>
+			</tr>
+			<!-- <div id="billcomponents">
+			<tr height=275>
+			<td id="sno" style="border: 2px solid black;">1</td>
+			<td id="drawingcode" style="border: 2px solid black;">123456778</td>
+			<td id="description" style="border: 2px solid black;">Description</td>
+			<td id="hsn" style="border: 2px solid black;">HSN</td>
+			<td id="uom" style="border: 2px solid black;">Units</td>
+			<td id="qty" style="border: 2px solid black;">123</td>
+			<td id="rateunit" style="border: 2px solid black;">1000</td>
+			<td id="taxablevalue" style="border: 2px solid black;">10909</td>
+			</tr>
+			</div> -->
+			<tr class="text-right">
+				<td style="border-left: 2px solid black;border-bottom:none;border-right:none;" colspan=7>Total Taxable Value&nbsp&nbsp&nbsp</td>
+				<td id="total" style="border-right: 2px solid black;border-bottom:none;border-left:none;border-top:none">10909</td>
+			</tr>
+			
+			<tr class="text-right">
+				<td style="border-left: 2px solid black;border-bottom:none;border-right:none;border-top:none" colspan=6>CGST</td>
+				<td style="border:none">9%</td>
+				<td id="cgst" style="border-right: 2px solid black;border-bottom:none;border-top:none;border-left:none;">10909</td>
+			</tr>
+			
+			<tr class="text-right">
+				<td style="border-left: 2px solid black;border-bottom:none;border-right:none;border-top:none" colspan=6>SGST</td>
+				<td style="border:none">9%</td>
+				<td id="sgst" style="border-right: 2px solid black;border-bottom:none;border-top:none;border-left:none">10909</td>
+			</tr>
+			
+			<tr style="margin:0px;padding:0px;">
+				<td class="text-right" colspan=7 style="border:2px solid black;"><b>Total Value&nbsp&nbsp</b></td>
+				<td id="grandtotal" class="text-right" style="border:2px solid black;"><b>₹&nbsp&nbsp&nbsp13213</b></td>
+			</tr>
+			
+			<tr>
+				<td colspan=8 height=100 style="border:2px solid black;">Amount Chargeable  ( in words)<p id="totalwords" class="text-center">Rupees Five Thousand  Six Hundred and Thirteen  only.</p></td>
+			</tr>
+			
+			<tr>
+			<td class="text-center" style="border:2px solid black;" colspan=4>Received the above goods in good condition<br><br><br>Signature of the Party</td>
+			<td class="text-center" style="border:2px solid black;" colspan=4><img width=250 height=26 src="/public/images/billariserlogo.png" v:shapes="WordArt_x0020_1"><br><br><br>Authorised Signatory</td>
+			</tr>
+			
+			<tr>
+				<td colspan=8 style="border:2px solid black;">Terms :<p id="terms" style="font-size:15px">
+				*Interest will be charged @24% P.A. on unpaid bills after the due date.<br>
+				*Our responsibilities ceases as soon as the Goods leaves our Godown<br>
+				and we are not responsible for any loss or damage in transit.<br>
+				*All disputes subject to Coimbatore Jurisdiction.
+				</p></td>
+			</tr>
+			
+		</table>
+		
+	</div>
+	</form>
+
+	<form class="p-5 bg-white" action="/pages/home">	
+		<input type = "submit" id="home" class="btn btn-default pull-left" value = "Home" onclick="" style="font-size:25px"></input>
+		<input type = "button" id="save" class="btn btn-default pull-left" value = "Print" onclick="window.print()" style="font-size:25px"></input>
+		<input type = "button" id="bill" class="btn btn-default pull-left" value = "New Bill" onclick="window.location.href = '/pages/bill'" style="font-size:25px"></input>
+		<input type = "button" id="bill" class="btn btn-default pull-left" value = "Bill History" onclick="window.location.href = '/pages/billhistory'" style="font-size:25px"></input>
+	</form>
+
+	<script src="/public/js/jquery-3.3.1.min.js"></script>
+	<script src="/public/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/public/js/jquery-ui.js"></script>
+	<script src="/public/js/jquery.js"></script>
+	<script src="/public/js/popper.min.js"></script>
+	<script src="/public/js/bootstrap.min.js"></script>
+	<script src="/public/js/owl.carousel.min.js"></script>
+	<script src="/public/js/jquery.stellar.min.js"></script>
+	<script src="/public/js/jquery.countdown.min.js"></script>
+	<script src="/public/js/jquery.magnific-popup.min.js"></script>
+	<script src="/public/js/bootstrap-datepicker.js"></script>
+	<script src="/public/js/aos.js"></script>
+	<script src="/public/js/rangeslider.min.js"></script>
+	<script src="/public/js/main.js"></script>
+	<script src="/public/js/printpage.js"></script>
+	
+  </body>
+</html>
