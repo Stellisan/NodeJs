@@ -11,7 +11,7 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jugglingdb": "^2.0.1",
     "jugglingdb-mysql": "^0.2.3",
     "mysql": "^2.17.1",
